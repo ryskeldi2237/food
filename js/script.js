@@ -66,7 +66,7 @@ document.addEventListener('keydown' , (e) => {
 // const interval = setTimeout(openModal , 30000);
 
 ////////////  Timer   ////////////
-const deadline = new Date('Thu June 24 2021 20:32:00');
+const deadline = new Date('Thu Jule 22 2021 00:00:00');
 function getTimeRemaining(endtime){
     const t = Date.parse(deadline)-Date.parse(new Date()),
         days = Math.floor(t / (1000 * 60 * 60 *24)),
@@ -143,9 +143,11 @@ function postMessage(form){
         })
         .then(data => data.text())
         .then(data => {
-            console.log(data);
+            
             showThanksModal(message.success);
             statusMessage.remove();
+            closeElem();
+
         }).catch(() => {
             showThanksModal(message.fail);
         }).finally(()=> {
@@ -155,26 +157,4 @@ function postMessage(form){
     })
 }
 
-function showThanksModal(message) {
-    const prevModalDialog = document.querySelector('.modal__dialog');
-
-    prevModalDialog.style.display="none";
-
-    openModal();
-
-    const thanksModal = document.createElement('div');
-    thanksModal.classList.add('modal__dialog');
-    thanksModal.innerHTML = `
-    <div class="modal__content">
-    <div class="modal__close" data-close>×</div>
-    <div class="modal__title">${message}</div>
-    </div>
-    `
-document.querySelector('.modal').append(thanksModal);
-setTimeout(()=> {
-    thanksModal.remove();
-    modalElem.classList.toggle('open');
-    closeElem();
-},4000)
-}
 /////////////////  slide ////////////////////
